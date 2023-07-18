@@ -1,0 +1,28 @@
+services:
+  billing-service:
+    build: ./billing-service
+    image: docker-assignment1/billing-service
+    ports:
+      - "5002:5000"
+
+  inventory-service:
+    build: ./inventory-service
+    image: docker-assignment1/inventory-service
+    ports:
+      - "5001:5000"
+
+  shipping-service:
+    build: ./shipping-service
+    image: docker-assignment1/shipping-service
+    ports:
+      - "5009:5000"
+    depends_on:
+      - billing-service
+    links:
+      - billing-service
+
+  users-service:
+    build: ./users-service
+    image: docker-assignment1/users-service
+    ports:
+      - "5006:5000"
